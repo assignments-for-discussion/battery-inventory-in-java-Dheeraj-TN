@@ -9,6 +9,19 @@ public class Main {
 
   static CountsBySoH countBatteriesByHealth(int[] presentCapacities) {
     CountsBySoH counts = new CountsBySoH();
+    int ratedCapacity = 120;
+    for(int cap:presentCapacities){
+      double SoH = (double) cap/ratedCapacity * 100;
+      if(SoH > 83){
+        counts.healthy++;
+      }
+      else if(SoH>=63){
+        counts.exchange++;
+      }
+      else{
+        counts.failed++;
+      }
+    }
     return counts;
   }
 
@@ -16,8 +29,8 @@ public class Main {
     System.out.println("Counting batteries by SoH...\n");
     int[] presentCapacities = {113, 116, 80, 95, 92, 70};
     CountsBySoH counts = countBatteriesByHealth(presentCapacities);
-    assert(counts.healthy == 2);
-    assert(counts.exchange == 3);
+    assert(counts.healthy == 2) ;
+    assert(counts.exchange == 3) ;
     assert(counts.failed == 1);
     System.out.println("Done counting :)\n");
   }
