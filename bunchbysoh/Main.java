@@ -10,8 +10,12 @@ public class Main {
   static CountsBySoH countBatteriesByHealth(int[] presentCapacities) {
     CountsBySoH counts = new CountsBySoH();
     int ratedCapacity = 120;
-    for(int cap:presentCapacities){
-      double SoH = (double) cap/ratedCapacity * 100;
+    for(int capacity:presentCapacities){
+      if (capacity <= 0 || capacity > ratedCapacity) {
+            continue;
+            // Skip invalid capacity values
+        }
+      double SoH = (double) capacity/ratedCapacity * 100;
       if(SoH > 83){
         counts.healthy++;
       }
